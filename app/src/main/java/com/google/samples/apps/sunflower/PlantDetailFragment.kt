@@ -27,6 +27,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -35,16 +36,21 @@ import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 /**
  * A fragment representing a single Plant detail screen.
  */
-class PlantDetailFragment : Fragment() {
+class PlantDetailFragment : DaggerFragment() {
 
-    private val args: PlantDetailFragmentArgs by navArgs()
+    val args: PlantDetailFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var viwModelFactory: ViewModelProvider.Factory
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
-        InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
+        viwModelFactory
     }
 
     override fun onCreateView(

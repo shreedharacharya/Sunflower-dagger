@@ -16,7 +16,7 @@
 
 package com.google.samples.apps.sunflower.data
 
-class GardenPlantingRepository private constructor(
+class GardenPlantingRepository  constructor(
     private val gardenPlantingDao: GardenPlantingDao
 ) {
 

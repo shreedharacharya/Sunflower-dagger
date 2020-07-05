@@ -25,33 +25,43 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.google.samples.apps.sunflower.adapters.PlantAdapter
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class PlantListFragment : Fragment() {
+class PlantListFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var adapter: PlantAdapter
 
     private val viewModel: PlantListViewModel by viewModels {
         InjectorUtils.providePlantListViewModelFactory(this)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
         context ?: return binding.root
 
-        val adapter = PlantAdapter()
+        //val adapter = PlantAdapter()
         binding.plantList.adapter = adapter
         subscribeUi(adapter)
 
         setHasOptionsMenu(true)
         return binding.root
     }
+
+//    override fun inject(fragmentComponent: FragmentComponent) {
+//        fragmentComponent.inject(this)
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_plant_list, menu)

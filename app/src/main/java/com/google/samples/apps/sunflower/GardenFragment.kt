@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
@@ -29,22 +30,33 @@ import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class GardenFragment : Fragment() {
+class GardenFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentGardenBinding
 
+    @Inject
+    lateinit var adapter: GardenPlantingAdapter
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val viewModel: GardenPlantingListViewModel by viewModels {
-        InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
+        viewModelFactory
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+
         binding = FragmentGardenBinding.inflate(inflater, container, false)
-        val adapter = GardenPlantingAdapter()
+        //  val adapter = GardenPlantingAdapter()
         binding.gardenList.adapter = adapter
 
         binding.addPlant.setOnClickListener {
@@ -54,6 +66,10 @@ class GardenFragment : Fragment() {
         subscribeUi(adapter, binding)
         return binding.root
     }
+
+//    override fun inject(fragmentComponent: FragmentComponent) {
+//        fragmentComponent.inject(this)
+//    }
 
     private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
         viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
@@ -65,6 +81,6 @@ class GardenFragment : Fragment() {
     // TODO: convert to data binding if applicable
     private fun navigateToPlantListPage() {
         requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
-            PLANT_LIST_PAGE_INDEX
+                PLANT_LIST_PAGE_INDEX
     }
 }

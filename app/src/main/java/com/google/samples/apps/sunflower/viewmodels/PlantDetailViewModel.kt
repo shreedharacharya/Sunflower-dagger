@@ -22,14 +22,16 @@ import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * The ViewModel used in [PlantDetailFragment].
  */
-class PlantDetailViewModel(
+class PlantDetailViewModel @Inject constructor(
     plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
+    @Named("plantId")private val plantId: String
 ) : ViewModel() {
 
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)

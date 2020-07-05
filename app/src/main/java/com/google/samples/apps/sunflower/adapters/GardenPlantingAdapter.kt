@@ -29,8 +29,10 @@ import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
 import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GardenPlantingAdapter :
+class GardenPlantingAdapter @Inject constructor() :
     ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(
         GardenPlantDiffCallback()
     ) {
