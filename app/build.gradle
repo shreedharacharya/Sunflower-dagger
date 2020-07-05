@@ -83,6 +83,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
 
+    //hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt"
+
     // Testing dependencies
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
