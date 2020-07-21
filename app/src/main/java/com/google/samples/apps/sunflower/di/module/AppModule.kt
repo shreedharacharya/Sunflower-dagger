@@ -23,24 +23,22 @@ import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
 /**
  * Created by Shreedhar on 19,June,2020
  */
+
+@InstallIn(ApplicationComponent::class)
 @Module
 class AppModule {
 
     @Singleton
     @Provides
-    fun providesAppContext(application: BaseApplication): Context {
-        return application.applicationContext
-    }
-
-
-    @Singleton
-    @Provides
-    fun providesDatabase(context: Context): AppDatabase {
+    fun providesDatabase(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getInstance(context)
     }
 

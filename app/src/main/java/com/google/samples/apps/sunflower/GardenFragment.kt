@@ -32,21 +32,18 @@ import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
 import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class GardenFragment : DaggerFragment() {
+@AndroidEntryPoint
+class GardenFragment : Fragment() {
 
     private lateinit var binding: FragmentGardenBinding
 
     @Inject
     lateinit var adapter: GardenPlantingAdapter
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val viewModel: GardenPlantingListViewModel by viewModels {
-        viewModelFactory
-    }
+    private val viewModel: GardenPlantingListViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,

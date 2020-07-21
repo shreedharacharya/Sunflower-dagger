@@ -17,36 +17,11 @@
 package com.google.samples.apps.sunflower
 
 import android.app.Application
-import com.google.samples.apps.sunflower.di.component.AppComponent
-import com.google.samples.apps.sunflower.di.component.DaggerAppComponent
-import com.google.samples.apps.sunflower.di.module.AppModule
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * Created by Shreedhar on 19,June,2020
  */
-class BaseApplication : DaggerApplication() {
-//    @Volatile
-//    private var appComponent: AppComponent? = null
-    override fun onCreate() {
-        //getAppComponent()
-        super.onCreate()
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.factory().create(this)
-    }
-
-//    fun getAppComponent(): AppComponent {
-//        return appComponent ?: synchronized(this) {
-//            appComponent ?: DaggerAppComponent.builder()
-//                    .appModule(AppModule(this))
-//                    .build()
-//                    .also {
-//                        appComponent = it
-//                        appComponent!!.inject(this)
-//                    }
-//        }
-//    }
+@HiltAndroidApp
+class BaseApplication : Application() {
 }

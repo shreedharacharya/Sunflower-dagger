@@ -32,9 +32,11 @@ import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class PlantListFragment : DaggerFragment() {
+@AndroidEntryPoint
+class PlantListFragment : Fragment() {
 
     @Inject
     lateinit var adapter: PlantAdapter

@@ -19,11 +19,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    dataBinding {
-        enabled = true
+    buildFeatures{
+        dataBinding = true
     }
     defaultConfig {
         applicationId "com.google.samples.apps.sunflower"
@@ -86,6 +87,8 @@ dependencies {
     //hilt
     implementation "com.google.dagger:hilt-android:$rootProject.hilt"
     kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hiltJetPack"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hiltJetPack"
 
     // Testing dependencies
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"

@@ -16,6 +16,9 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.PlantDetailFragment
@@ -28,12 +31,12 @@ import javax.inject.Named
 /**
  * The ViewModel used in [PlantDetailFragment].
  */
-class PlantDetailViewModel @Inject constructor(
+class PlantDetailViewModel @ViewModelInject constructor(
     plantRepository: PlantRepository,
     private val gardenPlantingRepository: GardenPlantingRepository,
-    @Named("plantId")private val plantId: String
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
+    private val plantId: String = savedStateHandle["plantId"]!!
     val isPlanted = gardenPlantingRepository.isPlanted(plantId)
     val plant = plantRepository.getPlant(plantId)
 
