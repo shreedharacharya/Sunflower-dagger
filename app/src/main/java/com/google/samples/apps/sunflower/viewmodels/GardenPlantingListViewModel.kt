@@ -21,7 +21,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
-import javax.inject.Inject
 
 class GardenPlantingListViewModel @ViewModelInject internal constructor(
         gardenPlantingRepository: GardenPlantingRepository

@@ -25,8 +25,6 @@ import com.google.samples.apps.sunflower.PlantDetailFragment
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * The ViewModel used in [PlantDetailFragment].

@@ -17,7 +17,6 @@
 package com.google.samples.apps.sunflower.di.module
 
 import android.content.Context
-import com.google.samples.apps.sunflower.BaseApplication
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -53,5 +52,4 @@ class AppModule {
     fun providesPlantRepo(database: AppDatabase): PlantRepository {
         return PlantRepository(database.plantDao())
     }
-
 }
